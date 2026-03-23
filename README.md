@@ -40,7 +40,7 @@ Leveraging agentic AI capabilities, Kun Code doesn't just chat; it *runs command
       <td align="center"><b>About Developer Modal</b></td>
     </tr>
     <tr>
-      <td><img src="mbile.png" alt="Mobile Preview" width="300" /></td>
+      <td><img src="mobile.png" alt="Mobile Preview" width="300" /></td>
       <td><img src="about.png" alt="About Modal" width="300" /></td>
     </tr>
   </table>
