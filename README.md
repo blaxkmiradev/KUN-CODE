@@ -58,8 +58,8 @@ Leveraging agentic AI capabilities, Kun Code doesn't just chat; it *runs command
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/blaxkmiradev/kun-code.git
-   cd kun-code
+   git clone https://github.com/blaxkmiradev/KUN-CODE.git
+   cd KUN-CODE
    ```
 
 2. **Install necessary dependencies:**
