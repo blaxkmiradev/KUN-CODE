@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="logo.jpg" alt="Kun Code Logo" width="120" />
+  <img src="https://avatars.githubusercontent.com/u/246539416?s=400&u=7db1395e75bc70cf7ecbd3a1a9aa84dbc76b85ac&v=4" alt="Kun Code Logo" width="120" style="border-radius: 50%" />
   <h1>KUN CODE</h1>
   <p><strong>The Ultimate AI Developer IDE for Mobile & Desktop</strong></p>
 </div>
