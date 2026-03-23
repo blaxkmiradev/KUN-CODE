@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kun Code | AI Developer IDE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-area">
+            <img src="{{ url_for('static', filename='logo.jpg') }}" alt="Kun Logo" class="logo-img">
+            <h1>KUN CODE <span class="status-badge">ONLINE</span></h1>
+        </div>
+        <div class="actions">
+            <span id="current-path" class="path-display"></span>
+            <select id="model-selector" class="secondary-btn">
+                <option value="kun-2.5-pro">Kun Code 2.5 Pro (Ultra AI)</option>
+                <option value="kun-2.5-flash">Kun Code 2.5 Flash</option>
+                <option value="kun-2.5-lite">Kun Code 2.5 Lite</option>
+                <option value="kun-2.0-pro">Kun Code 2.0 Pro</option>
+                <option value="kun-1.5-pro">Kun Code 1.5 Pro</option>
+                <option value="kun-1.5-flash">Kun Code 1.5 Flash</option>
+                <option value="kun-1.5-flash-8b">Kun Code 1.5 Mini (8B)</option>
+            </select>
+            <button id="new-chat-btn" class="secondary-btn">New Chat</button>
+            <button id="open-folder-btn" class="secondary-btn">Open Folder</button>
+            <button id="about-btn" class="secondary-btn">About</button>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Explorer removed -->
+
+        <section class="chat-section">
+            <div id="chat-history">
+                <div class="message ai-message">
+                    Hello! I am <strong>Kun Code</strong>. I can create files, build projects, and help you code. How can I help you today?
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="mobile-action-suite">
+                    <select id="mobile-model-selector" class="mobile-btn model-btn">
+                        <option value="kun-2.5-pro">Kun 2.5 Pro</option>
+                        <option value="kun-2.5-flash">Kun 2.5 Flash</option>
+                        <option value="kun-2.0-pro">Kun 2.0 Pro</option>
+                        <option value="kun-1.5-pro">Kun 1.5 Pro</option>
+                    </select>
+                    <button class="mobile-btn" onclick="document.getElementById('new-chat-btn').click()">New Chat</button>
+                    <button class="mobile-btn" onclick="document.getElementById('open-folder-btn').click()">Folder</button>
+                    <button class="mobile-btn" onclick="document.getElementById('about-btn').click()">About</button>
+                </div>
+                <form id="chat-form">
+                    <div class="input-wrapper">
+                        <input type="text" id="user-input" placeholder="Type message..." autocomplete="off">
+                        <button type="submit" id="send-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <div id="setup-modal" class="modal" style="display: {{ 'none' if has_key else 'flex' }}">
+        <div class="modal-content">
+            <h2>Welcome to Kun Code</h2>
+            <p>Please enter your <strong>Gemini API Key</strong> to start building.</p>
+            <input type="password" id="api-key-input" placeholder="Paste your API key here...">
+            <button id="save-key-btn">Save and Start</button>
+            <p class="small">Your key will be saved to a <code>.env</code> file in your project directory.</p>
+        </div>
+    </div>
+
+    <div id="about-modal" class="modal" style="display: none;">
+        <div class="modal-content developer-card">
+            <div class="dev-cover"></div>
+            <span class="close-modal" id="close-about">&times;</span>
+            <div class="profile-header">
+                <div class="avatar-ring">
+                    <img src="https://avatars.githubusercontent.com/u/246539416?s=400&u=7db1395e75bc70cf7ecbd3a1a9aa84dbc76b85ac&v=4" alt="Rikixz" class="dev-img">
+                </div>
+                <h2>Rikixz</h2>
+                <div class="dev-badge">Fullstack Developer & AI Architect</div>
+            </div>
+            <div class="dev-body">
+                <p class="dev-bio">Crafting high-end, intelligent software interfaces with precision and passion. Architect of Kun Code.</p>
+                <div class="links-area">
+                    <a href="https://github.com/blaxkmiradev" target="_blank" class="dev-link github">
+                        <svg height="20" width="20" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                        <span>GitHub Profile</span>
+                    </a>
+                    <a href="https://t.me/yunaonthetp" target="_blank" class="dev-link telegram">
+                        <svg height="20" width="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.35-.01-1.02-.2-1.53-.36-.62-.2-1.12-.31-1.07-.65.03-.18.27-.36.72-.54 2.81-1.22 4.69-2.03 5.61-2.42 2.68-1.14 3.24-1.33 3.6-1.33.08 0 .26.02.38.12.1.08.13.19.14.28 0 .09.01.21 0 .31z"></path></svg>
+                        <span>Direct Telegram</span>
+                    </a>
+                </div>
+            </div>
+            <div class="dev-footer">
+                <p class="made-with">Designed & Built with 💙</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
